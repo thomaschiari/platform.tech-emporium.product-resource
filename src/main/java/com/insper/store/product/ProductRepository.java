@@ -1,13 +1,11 @@
-package com.insper.store.product;
+    package com.insper.store.product;
 
-import java.util.Optional;
+    import java.util.Optional;
+    import org.springframework.data.repository.CrudRepository;
+    import org.springframework.stereotype.Repository;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+    @Repository
+    public interface ProductRepository extends CrudRepository<ProductModel, Integer> { // Changed ID type to Integer
 
-@Repository
-public interface ProductRepository extends CrudRepository<ProductModel, String> {
-
-    Optional<ProductModel> findByName(String name);
-    
-}
+        Optional<ProductModel> findByName(String name);
+    }

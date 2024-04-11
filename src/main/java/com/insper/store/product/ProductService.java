@@ -1,37 +1,54 @@
 package com.insper.store.product;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.NonNull;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class ProductService {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductRepository repository;
 
-    public ProductModel create(Product in) {
-        return productRepository.save(new ProductModel(in));
+    public ProductModel create(ProductIn in) {
+        // Assuming ProductIn is a valid input class. If hashing/encoding is needed, implement here before saving.
+        return repository.save(
+                new ProductModel()
+                        .name(in.name())
+                        .description(in.description())
+                        .price(in.price())
+                        .stock(in.stock())
+        );
     }
 
-    public Product read(@NonNull String id) {
-        return productRepository.findById(id).map(ProductModel::to).orElse(null);
+    public ProductModel read(Integer id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found for this id :: " + id));
     }
 
-    public Product update(@NonNull String id, Product in) {
-        ProductModel model = productRepository.findById(id).orElseThrow();
-        model.update(in);
-        return productRepository.save(model).to();
+    public ProductModel update(Integer id, ProductIn in) {
+        ProductModel model = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found for this id :: " + id));
+        return repository.save(
+                model
+                        .name(in.name())
+                        .description(in.description())
+                        .price(in.price())
+                        .stock(in.stock())
+        );
     }
 
-    public void delete(@NonNull String id) {
-        productRepository.deleteById(id);
+    public void delete(Integer id) {
+        repository.deleteById(id);
     }
 
+    public List<ProductModel> readAll() {
+        Iterable<ProductModel> allProducts = repository.findAll();
+        return StreamSupport.stream(allProducts.spliterator(), false)
+                            .collect(Collectors.toList());
+    }
+    
 }

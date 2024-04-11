@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
 public class ProductModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Adjusted for numeric ID
     @Column(name = "id_product")
     private Integer id;
 
@@ -37,17 +37,17 @@ public class ProductModel {
 
     @Column(name = "stock_product")
     private Integer stock;
-
-    public ProductModel(Product o) {
-        this.id = o.id();
-        this.name = o.name();
-        this.description = o.description();
-        this.price = o.price();
-        this.stock = o.stock();
-    }
     
-    public Account to() {
-        return Account.builder()
+    // Assuming ProductIn structure. Adjust according to actual structure.
+    public ProductModel(ProductIn in) {
+        this.name = in.name();
+        this.description = in.description();
+        this.price = in.price();
+        this.stock = in.stock();
+    }
+
+    public ProductOut toOut() {
+        return ProductOut.builder()
             .id(id)
             .name(name)
             .description(description)
@@ -55,5 +55,4 @@ public class ProductModel {
             .stock(stock)
             .build();
     }
-    
 }

@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.insper.store</groupId>
-	<artifactId>product</artifactId>
+	<artifactId>product-resource</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>product</name>
-	<description>Product</description>
+	<name>product :: resource</name>
+	<description>DSk;dksdl</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -24,6 +24,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.insper.store</groupId>
+			<artifactId>product</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>

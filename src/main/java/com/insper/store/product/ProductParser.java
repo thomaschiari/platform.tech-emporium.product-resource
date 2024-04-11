@@ -2,19 +2,32 @@ package com.insper.store.product;
 
 public class ProductParser {
 
-    public static Product to(ProductIn in) {
+    public static Product from(ProductIn in) {
         return Product.builder()
             .name(in.name())
+            .description(in.description())
             .price(in.price())
+            .stock(in.stock())
             .build();
     }
 
-    public static ProductOut to(Product product) {
+    public static ProductOut toOut(ProductModel model) {
         return ProductOut.builder()
-            .id(product.id())
-            .name(product.name())
-            .price(product.price())
+            .id(model.id())
+            .name(model.name())
+            .description(model.description())
+            .price(model.price())
+            .stock(model.stock())
             .build();
     }
-    
+
+    public static ProductModel toModel(ProductIn in) {
+        return ProductModel.builder()
+            .name(in.name())
+            .description(in.description())
+            .price(in.price())
+            .stock(in.stock())
+            .build();
+    }
+
 }
