@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.List;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 public class ProductResource implements ProductController {
 
     @Autowired
     private ProductService productService;
 
+    @ApiOperation(value = "Get information about the product microservice")
     @GetMapping("/products/info")
     public ResponseEntity<Map<String, String>> info() {
         // Assuming ProductApplication.class is correctly referenced
