@@ -17,7 +17,7 @@ spring:
 management:
   endpoints:
     web:
-      base-path: /product/actuator
+      base-path: /products/actuator
       exposure:
         include: [ 'prometheus' ]
 
@@ -27,3 +27,11 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
+
+
+springdoc:
+  api-docs:
+    path: /products/v3/api-docs
+  swagger-ui:
+    path: /products/swagger-ui.html
+  version: 3.0.0
