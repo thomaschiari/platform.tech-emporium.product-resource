@@ -15,14 +15,14 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 @EqualsAndHashCode(of = "id")
 @Builder @Getter @Setter @Accessors(chain = true, fluent = true)
 @NoArgsConstructor @AllArgsConstructor
 public class ProductModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Adjusted for numeric ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_product")
     private Integer id;
 
@@ -38,7 +38,6 @@ public class ProductModel {
     @Column(name = "stock_product")
     private Integer stock;
     
-    // Assuming ProductIn structure. Adjust according to actual structure.
     public ProductModel(ProductIn in) {
         this.name = in.name();
         this.description = in.description();
