@@ -23,32 +23,38 @@ spec:
                 configMapKeyRef:
                   name: discovery-configmap
                   key: DISCOVERY_HOST
-
             - name: POSTGRES_HOST
               valueFrom:
                 configMapKeyRef:
                   name: postgres-configmap
                   key: POSTGRES_HOST
-
             - name: POSTGRES_DB
               valueFrom:
-                configMapKeyRef:
+                configMapKeyRefe:
                   name: postgres-configmap
                   key: POSTGRES_DB
-
             - name: POSTGRES_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: postgres-credentials
                   key: POSTGRES_USERNAME
-
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-credentials
                   key: POSTGRES_PASSWORD
-
             - name: REDIS_HOST
-              value: "redis-service"  
+              value: "redis-service"
             - name: REDIS_PORT
-              value: "6379"  
+              value: "6379"
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+            - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+              value: "health,info,prometheus"
+          volumeMounts:
+            - name: config-volume
+              mountPath: "/config"
+          volumes:
+            - name: config-volume
+              configMap:
+                name: products-circuit-breaker-config
