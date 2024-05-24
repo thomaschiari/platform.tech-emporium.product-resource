@@ -54,7 +54,7 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: "/config"
-          volumes:
-            - name: config-volume
-              configMap:
-                name: products-circuit-breaker-config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: products-circuit-breaker-config
